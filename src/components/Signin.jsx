@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signin = () => {
 
@@ -33,7 +33,7 @@ const Signin = () => {
       formdata.append("password", password);
 
       //interact with the axios for the responce
-      const response = await axios.post("https://kbenkamotho.alwaysdata.net/api/signin", formdata);
+      const response = await axios.post("http://ramogi-web.alwaysdata.net/api/signin", formdata);
 
       //set the loading book back default
       setLoading("");
@@ -42,6 +42,10 @@ const Signin = () => {
       if(response.data.user){
         // if user is there details entered are correct
         //setSuccess("Log in successful")
+
+         // Store user details in local storage
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
         // if it is successful let a person get redirected to another page
         navigate("/");
       }
@@ -91,7 +95,10 @@ const Signin = () => {
 
             <input type="submit"
             value="Signin"
-            className='btn btn-primary form-control' />
+            className='btn btn-primary form-control' /> <br /><br />
+
+          Dont have an account? <Link to={'/signup'} >Register</Link>
+
           </form>
 
         </div>
