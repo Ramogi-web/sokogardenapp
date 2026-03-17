@@ -47,11 +47,15 @@ const Addproducts = () => {
       setProductCost("");
       setProductPhoto("");
 
+    // clear the fileinput value
+  e.target.reset()
+
       //set timeout
        setTimeout(() => {
     setSuccess("");
   }, 5000);
-
+    
+  
     } catch (error) {
       //set the loading hook back to default
       setLoading(false);
